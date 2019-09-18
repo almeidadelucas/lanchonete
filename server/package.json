@@ -1,0 +1,22 @@
+{
+  "name": "backend-lanchonete",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/almeidadelucas/lanchonte.git"
+  },
+  "author": "Lucas Almeida <almeidadelucas@gmail.com> | Elias Reis <eliasreis54@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/almeidadelucas/lanchonte/issues"
+  },
+  "homepage": "https://github.com/almeidadelucas/lanchonte#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
