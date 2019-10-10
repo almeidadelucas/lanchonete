@@ -11,3 +11,6 @@ const IngredientSchema = new Schema({
     required: [true, "Missing value!"]
   }
 });
+
+let Ingredient = mongoose.model('Ingredient', IngredientSchema);
+module.exports = Ingredient;
