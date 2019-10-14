@@ -3,17 +3,25 @@ const Ingredient = require('../schema/ingredients.js');
 
 const router = express.Router();
 
+
 router.get('/', (req, res) => {
-    Ingredient.findOne({name: 'Salada'}, 'name value', function (err, ingredients) {
-        err ? res.send('Error to find ingredients!') : res.send(ingredients);
+    Ingredient.find((err, ingredients) => {
+        return err ? res.send('Error to find all ingredients!') : res.send(ingredients);
     });
 });
 
-router.post('/post', (req, res) => {
-    let newIngredient = new Ingredient({name: "Salada", value: 2.5});
-    newIngredient.save(function(err) {
+router.get('/:name', (req, res) => {
+    Ingredient.findOne({name: req.params.name}, 'name value', (err, ingredient) => {
+        return err ? res.send('Error to find ingredients!') : res.send(ingredient);
+    });
+});
+
+router.post('/', (req, res) => {
+    const newIngredient = new Ingredient(req.body);
+    newIngredient.save(err => {
         if(err) throw err;
-        res.send('Ingridient created with succes');
+        console.log(teste);
+        return res.send('Ingridient created with succes');
     });
 });
 
