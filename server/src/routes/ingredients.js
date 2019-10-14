@@ -1,24 +1,20 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const Ingredient = require('../modules/ingredients.js');
+const Ingredient = require('../schema/ingredients.js');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    Ingredient.findOne({name: 'salada'}, 'name value', function (err, ingredients) {
+    Ingredient.findOne({name: 'Salada'}, 'name value', function (err, ingredients) {
         err ? res.send('Error to find ingredients!') : res.send(ingredients);
     });
 });
 
 router.post('/post', (req, res) => {
     let newIngredient = new Ingredient({name: "Salada", value: 2.5});
-    Ingredient.create(newIngredient)
-        .then(function (createdIngredient) {
-            res.json(createdIngredient);     
-        })
-        .catch(function(err) {
-            res.json(err);
-        })
+    newIngredient.save(function(err) {
+        if(err) throw err;
+        res.send('Ingridient created with succes');
+    });
 });
 
 module.exports = router;
