@@ -3,7 +3,6 @@ const Ingredient = require('../schema/ingredients.js');
 
 const router = express.Router();
 
-
 router.get('/', (req, res) => {
     Ingredient.find((err, ingredients) => {
         return err ? res.send('Error to find all ingredients!') : res.send(ingredients);
