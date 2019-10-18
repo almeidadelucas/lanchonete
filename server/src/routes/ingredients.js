@@ -9,19 +9,35 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:name', (req, res) => {
-    Ingredient.findOne({name: req.params.name}, 'name value', (err, ingredient) => {
-        return err ? res.send('Error to find ingredients!') : res.send(ingredient);
+router.get('/:id', (req, res) => {
+    Ingredient.findOne({_id: req.params.id}, 'name value', (err, ingredient) => {
+        return err ? res.send('Error to find ingredient!') : res.send(ingredient);
     });
 });
 
 router.post('/', (req, res) => {
     const newIngredient = new Ingredient(req.body);
     newIngredient.save(err => {
-        if(err) throw err;
-        console.log(teste);
-        return res.send('Ingridient created with succes');
+        return err ? res.send('Error to create ingredient!') : res.send(newIngredient)
     });
 });
+
+router.delete('/', (req, res) => {
+    Ingredient.deleteMany(err => {
+        return err ? res.send('Error to delete all ingredients!') : res.send('Ingredients deleted with succes!');
+    });
+});
+
+router.delete('/:id', (req, res) => {
+    Ingredient.deleteOne({_id: req.params.id}, err => {
+        return err ? res.send('Error to delete this ingredient!') : res.send('Ingredient deleted with succes!');
+    });
+});
+
+// router.post('/:id', (req, res) => {
+//     Ingredient.updateOne(err => {
+//         return err ? res.send('Error to update ingredient!') : res.send('Ingredient updated with succes!');
+//     });
+// });
 
 module.exports = router;
