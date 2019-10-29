@@ -7,9 +7,9 @@ const IngredientSchema = new Schema({
     type: String,
     required: [true, 'Missing name!'],
   },
-  value: {
+  price: {
     type: Number,
-    required: [true, 'Missing value!'],
+    required: [true, 'Missing price!'],
   },
 });
 

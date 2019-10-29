@@ -1,5 +1,5 @@
 const express = require('express');
-const Ingredient = require('../schema/ingredients.js');
+const Ingredient = require('./model');
 
 const router = express.Router();
 

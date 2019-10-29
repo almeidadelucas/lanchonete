@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": ""
+    "test": "",
+    "lint": "eslint --ext=js --max-warnings=0 .",
+    "lint:fix": "eslint --fix --ext=js --max-warnings=0 ."
   },
   "repository": {
     "type": "git",
@@ -22,8 +24,9 @@
     "mongoose": "^5.7.1"
   },
   "devDependencies": {
-    "eslint": "^6.1.0",
+    "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-node": "^4.0.0",
     "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-import": "^2.18.2",
