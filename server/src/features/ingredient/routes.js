@@ -13,9 +13,8 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => helper.create(req.body)
-  .then(data => res.sendStatus(200).send(data))
-  .catch(err => res.sendStatus(500).send(err))
-);
+  .then((data) => res.sendStatus(200).send(data))
+  .catch((err) => res.sendStatus(500).send(err)));
 
 router.put('/:id', (req, res) => {
   Ingredient.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, ingredient) => (err ? res.status(500).send('Erro to update ingredient') : res.status(200).send(ingredient)));

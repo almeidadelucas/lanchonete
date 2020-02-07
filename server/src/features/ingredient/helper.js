@@ -1,24 +1,25 @@
 const Ingredient = require('./model');
 
-const create = data => {
+const create = (data) => {
   const savedIngredients = [];
-  if (!Array.isArray(data)) 
+  let ingredientsToAdd = data;
+
+  if (!Array.isArray(data)) {
     ingredientsToAdd = [data];
-  else
-    ingredientsToAdd = data;
+  }
 
   try {
-    ingredientsToAdd.forEach(ingredient => {
+    ingredientsToAdd.forEach((ingredient) => {
       const newIngredient = new Ingredient(ingredient);
       newIngredient.save();
-      savedIngredients.push(newIngredient)
-    })
+      savedIngredients.push(newIngredient);
+    });
     return Promise.resolve(savedIngredients);
   } catch (err) {
     return Promise.reject(err);
   }
-}
+};
 
 module.exports = {
   create,
-}
+};
