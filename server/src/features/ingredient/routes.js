@@ -1,4 +1,5 @@
 const express = require('express');
+const helper = require('./helper');
 const Ingredient = require('./model');
 
 const router = express.Router();
@@ -11,10 +12,10 @@ router.get('/:id', (req, res) => {
   Ingredient.findOne({ _id: req.params.id }, 'name value', (err, ingredient) => (err ? res.status(500).send('Error to find ingredient!') : res.status(200).send(ingredient)));
 });
 
-router.post('/', (req, res) => {
-  const newIngredient = new Ingredient(req.body);
-  newIngredient.save((err) => (err ? res.status(500).send('Error to create ingredient!') : res.status(200).send(newIngredient)));
-});
+router.post('/', (req, res) => helper.create(req.body)
+  .then(data => res.sendStatus(200).send(data))
+  .catch(err => res.sendStatus(500).send(err))
+);
 
 router.put('/:id', (req, res) => {
   Ingredient.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, ingredient) => (err ? res.status(500).send('Erro to update ingredient') : res.status(200).send(ingredient)));
