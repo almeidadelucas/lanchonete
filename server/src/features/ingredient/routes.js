@@ -3,6 +3,8 @@ const service = require('./service');
 
 const router = express.Router();
 
+router.get('/teste', (req, res) => res.status(200).send('teste'));
+
 router.get('/', (req, res) => service.findAll()
   .then((data) => res.status(200).send(data))
   .catch((err) => res.status(500).send(err)));
