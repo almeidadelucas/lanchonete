@@ -15,6 +15,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(routers);
 
-app.listen(3000, () => {
-  // console.debug('server running on port 3000');
-});
+// app.listen(3000, () => {
+//   // console.debug('server running on port 3000');
+// });
+
+module.exports = {
+  app,
+};
