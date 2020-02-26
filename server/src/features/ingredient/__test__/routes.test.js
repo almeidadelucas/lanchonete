@@ -7,6 +7,6 @@ describe('This is to test the app routers', () => {
       .get('/ingredients/teste')
       .expect('Content-Type', /text/)
       .expect('Content-Length', '5')
-      .expect(200, done)
+      .expect(200, done);
   });
 });
