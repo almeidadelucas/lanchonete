@@ -1,12 +1,26 @@
 const request = require('supertest');
-const app = require('../../../app');
+const mongoose = require('mongoose');
+const app = require('../../../index');
 
-describe('This is to test the app routers', () => {
-  it('teste /teste path', (done) => {
+describe('This is to test the ingredients routes', () => {
+  // it('GET /', (done) => {
+  //   request(app.app)
+  //     .get('/ingredients/')
+  //     .expect('Content-Type', 'application/json; charset=utf-8')
+  //     .expect((res) => expect(res.body).toEqual([]))
+  //     .expect(200, done);
+  // });
+
+  it('GET /:id', (done) => {
     request(app.app)
-      .get('/ingredients/teste')
-      .expect('Content-Type', /text/)
-      .expect('Content-Length', '5')
-      .expect(200, done);
+      .get('/ingredients/nonExistentId')
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .expect((res) => expect(res.body).toEqual([]))
+      .expect(404, done);
+  });
+
+  afterAll(() => {
+    mongoose.connection.close();
+    app.server.close();
   });
 });
