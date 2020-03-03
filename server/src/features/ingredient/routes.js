@@ -10,7 +10,12 @@ router.get('/', (req, res) => service.findAll()
   .catch((err) => res.status(500).send(err)));
 
 router.get('/:id', (req, res) => service.findById(req.params.id)
-  .then((data) => res.status(200).send(data))
+  .then((data) => {
+    if (data) {
+      return res.status(200).send(data);
+    }
+    return res.status(404).send('Ingredient not found');
+  })
   .catch((err) => res.status(500).send(err)));
 
 router.post('/', (req, res) => service.create(req.body)
