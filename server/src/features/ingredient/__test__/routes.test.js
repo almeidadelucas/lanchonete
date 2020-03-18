@@ -34,22 +34,37 @@ describe('This is to test the ingredients routes', () => {
       .expect(200, done);
   });
 
-  it('PUT /:id - Creating an ingredient', (done) => {
+  it('PUT /:id - Updating an ingredient', (done) => {
     const ingredient = { name: 'Hamburger', price: 7.00 };
     const newIngredient = new Ingredient(ingredient);
-    newIngredient.save();
-    const updatedIngredient = { name: 'Cheese', price: 3.00 };
+    newIngredient.save().then((data) => {
+      const updatedIngredient = { name: 'Cheese', price: 3.00 };
 
-    request(app.app)
-      .put(`/ingredients/${newIngredient._id}`)
-      .send(updatedIngredient)
-      .expect('Content-Type', 'application/json; charset=utf-8')
-      .expect((res) => {
-        expect(res.body.name).toEqual(updatedIngredient.name);
-        expect(res.body.price).toEqual(updatedIngredient.price);
-      })
-      .expect(200, done);
+      request(app.app)
+        .put(`/ingredients/${data._id}`)
+        .send(updatedIngredient)
+        .expect('Content-Type', 'application/json; charset=utf-8')
+        .expect((res) => {
+          expect(res.body.name).toEqual(updatedIngredient.name);
+          expect(res.body.price).toEqual(updatedIngredient.price);
+        })
+        .expect(200, done);
+    });
   });
+
+  it('DELETE /:id - Deleting an ingredient', (done) => {
+    const ingredient = { name: 'Hamburger', price: 7.00 };
+    const newIngredient = new Ingredient(ingredient);
+    newIngredient.save().then((data) => {
+      request(app.app)
+        .delete(`/ingredients/${data._id}`)
+        .expect('Content-Type', 'application/json; charset=utf-8')
+        .expect((res) => expect(res.body).toEqual('Ingredient deleted with success!'))
+        .expect(200, done);
+    });
+  });
+
+  afterEach((done) => mongoose.connection.db.dropDatabase(done));
 
   afterAll(() => {
     mongoose.connection.close();
