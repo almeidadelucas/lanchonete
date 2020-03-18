@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(routers);
 
 const server = app.listen(3000, () => {
-  // console.debug('server running on port 3000');
+  console.debug('server running on port 3000');
 });
 
 module.exports = {

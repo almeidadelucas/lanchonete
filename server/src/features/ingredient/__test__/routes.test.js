@@ -1,5 +1,6 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
+const Ingredient = require('../model');
 const app = require('../../../index');
 
 // TODO: Criar um banco para teste e limpá-lo depois de cada teste
@@ -20,7 +21,7 @@ describe('This is to test the ingredients routes', () => {
       .expect(404, done);
   });
 
-  it('POST /:id - Creating an ingredient', (done) => {
+  it('POST / - Creating an ingredient', (done) => {
     const newIngredient = { name: 'Hamburger', price: 7.00 };
     request(app.app)
       .post('/ingredients/')
@@ -29,6 +30,23 @@ describe('This is to test the ingredients routes', () => {
       .expect((res) => {
         expect(res.body[0].name).toEqual(newIngredient.name);
         expect(res.body[0].price).toEqual(newIngredient.price);
+      })
+      .expect(200, done);
+  });
+
+  it('PUT /:id - Creating an ingredient', (done) => {
+    const ingredient = { name: 'Hamburger', price: 7.00 };
+    const newIngredient = new Ingredient(ingredient);
+    newIngredient.save();
+    const updatedIngredient = { name: 'Cheese', price: 3.00 };
+
+    request(app.app)
+      .put(`/ingredients/${newIngredient._id}`)
+      .send(updatedIngredient)
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .expect((res) => {
+        expect(res.body.name).toEqual(updatedIngredient.name);
+        expect(res.body.price).toEqual(updatedIngredient.price);
       })
       .expect(200, done);
   });
