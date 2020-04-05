@@ -20,22 +20,15 @@ const create = (data) => {
   }
 };
 
-const destroy = (id) => Ingredient.deleteOne({ _id: id },
-  (err) => (err ? Promise.reject(err) : Promise.resolve('Ingredient deleted with success!')));
+const destroy = (id) => Ingredient.deleteOne({ _id: id });
 
-const destroyAll = () => Ingredient.deleteMany(
-  (err) => (err ? Promise.reject(err) : Promise.resolve('Ingredients deleted with succes!')),
-);
+const destroyAll = () => Ingredient.deleteMany();
 
-const findById = (id) => Ingredient.findOne({ _id: id }, 'name price',
-  (err, data) => (err ? Promise.reject(err) : Promise.resolve(data)));
+const findById = (id) => Ingredient.findOne({ _id: id }, 'name price');
 
-const findAll = () => Ingredient.find(
-  (err, data) => (err ? Promise.reject(err) : Promise.resolve(data)),
-);
+const findAll = () => Ingredient.find();
 
-const update = (id, newData) => Ingredient.findByIdAndUpdate(id, newData, { new: true },
-  (err, data) => (err ? Promise.reject(err) : Promise.resolve(data)));
+const update = (id, newData) => Ingredient.findByIdAndUpdate(id, newData, { new: true });
 
 module.exports = {
   create,
