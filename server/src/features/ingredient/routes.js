@@ -40,7 +40,7 @@ router.put('/:id', (req, res) => service.update(req.params.id, req.body)
   .catch((err) => res.status(500).send(err)));
 
 router.delete('/', (req, res) => service.destroyAll()
-  .then(() => res.status(200).send({
+  .then(() => res.status(202).send({
     data: null,
     message: 'All ingredients was deleted with succes!',
   }))
@@ -56,7 +56,7 @@ router.delete('/:id', (req, res) => service.destroy(req.params.id)
     } else {
       message = `${data.deletedCount} ingredients deleted with success!`;
     }
-    res.status(200).send({
+    res.status(202).send({
       data: null,
       message,
     });
