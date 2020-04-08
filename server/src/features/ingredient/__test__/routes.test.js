@@ -20,7 +20,7 @@ describe('This is to test the ingredients routes', () => {
     const newIngredient = new Ingredient(ingredient);
     newIngredient.save().then((data) => {
       request(app.app)
-        .get(`/ingredients/${data.id}`)
+        .get(`/ingredients/${data._id}`)
         .expect('Content-Type', 'application/json; charset=utf-8')
         .expect((res) => {
           expect(res.body.message).toEqual('Ingredient getted with success!');
