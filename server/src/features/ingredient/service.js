@@ -20,15 +20,15 @@ const create = (data) => {
   }
 };
 
-const destroy = (id) => Ingredient.deleteOne({ _id: id });
+const destroy = (_id) => Ingredient.deleteOne({ _id });
 
 const destroyAll = () => Ingredient.deleteMany();
 
-const findById = (id) => Ingredient.findOne({ _id: id }, 'name price');
+const findById = (_id) => Ingredient.findOne({ _id }, 'name price');
 
 const findAll = () => Ingredient.find();
 
-const update = (id, newData) => Ingredient.findByIdAndUpdate(id, newData, { new: true });
+const update = (_id, newData) => Ingredient.findByIdAndUpdate(_id, newData, { new: true });
 
 module.exports = {
   create,
