@@ -1,6 +1,6 @@
 const Ingredient = require('./model');
 
-const create = (data) => {
+const create = data => {
   const savedIngredients = [];
   let ingredientsToAdd = data;
 
@@ -9,7 +9,7 @@ const create = (data) => {
   }
 
   try {
-    ingredientsToAdd.forEach((ingredient) => {
+    ingredientsToAdd.forEach(ingredient => {
       const newIngredient = new Ingredient(ingredient);
       newIngredient.save();
       savedIngredients.push(newIngredient);
@@ -20,22 +20,15 @@ const create = (data) => {
   }
 };
 
-const destroy = (id) => Ingredient.deleteOne({ _id: id },
-  (err) => (err ? Promise.settled(err) : Promise.resolve('Ingredient deleted with success!')));
+const destroy = _id => Ingredient.deleteOne({ _id });
 
-const destroyAll = () => Ingredient.deleteMany(
-  (err) => (err ? Promise.settled(err) : Promise.resolve('Ingredients deleted with succes!')),
-);
+const destroyAll = () => Ingredient.deleteMany();
 
-const findById = (id) => Ingredient.findOne({ _id: id }, 'name price',
-  (err, data) => (err ? Promise.settled(err) : Promise.resolve(data)));
+const findById = _id => Ingredient.findOne({ _id }, 'name price');
 
-const findAll = () => Ingredient.find(
-  (err, data) => (err ? Promise.settled(err) : Promise.resolve(data)),
-);
+const findAll = () => Ingredient.find();
 
-const update = (id, newData) => Ingredient.findByIdAndUpdate(id, newData, { new: true },
-  (err, data) => (err ? Promise.settled(err) : Promise.resolve(data)));
+const update = (_id, newData) => Ingredient.findByIdAndUpdate(_id, newData, { new: true });
 
 module.exports = {
   create,

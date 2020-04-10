@@ -1,13 +1,16 @@
 {
     "extends": ["airbnb"],
     "env": {
-      "es6": true
+      "es6": true,
+      "jest": true
     },
     "parserOptions": {
       "ecmaVersion": 2018
     },
     "rules": {
-        "no-unused-vars": "warn",
+        "no-unused-vars": ["warn"],
+        "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+        "no-console": ["error", { "allow": ["debug"] }],
         "react/forbid-prop-types": "off",
         "jsx-a11y/click-events-have-key-events": "off",
         "jsx-a11y/no-static-element-interactions": "off",
@@ -17,6 +20,7 @@
         "quotes": ["error", "single", { "avoidEscape": true }],
         "semi": ["error", "always"],
         "curly": ["error", "all"],
-        "no-multiple-empty-lines": "warn"
+        "no-multiple-empty-lines": "warn",
+        "arrow-parens": ["error", "as-needed"]
     }
 }
