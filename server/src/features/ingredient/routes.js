@@ -1,31 +1,66 @@
 const express = require('express');
-const Ingredient = require('./model');
+const service = require('./service');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  Ingredient.find((err, ingredients) => (err ? res.status(500).send('Error to find all ingredients!') : res.status(200).send(ingredients)));
-});
+router.get('/', (req, res) => service.findAll()
+  .then(data => res.status(200).send({
+    data,
+    message: 'All ingredient getted with success!',
+  }))
+  .catch(err => res.status(500).send(err)));
 
-router.get('/:id', (req, res) => {
-  Ingredient.findOne({ _id: req.params.id }, 'name value', (err, ingredient) => (err ? res.status(500).send('Error to find ingredient!') : res.status(200).send(ingredient)));
-});
+router.get('/:id', (req, res) => service.findById(req.params.id)
+  .then(data => {
+    if (data) {
+      return res.status(200).send({
+        data,
+        message: 'Ingredient getted with success!',
+      });
+    }
+    return res.status(404).send({
+      data: null,
+      message: 'Ingredient not found!',
+    });
+  })
+  .catch(err => res.status(500).send(err)));
 
-router.post('/', (req, res) => {
-  const newIngredient = new Ingredient(req.body);
-  newIngredient.save((err) => (err ? res.status(500).send('Error to create ingredient!') : res.status(200).send(newIngredient)));
-});
+router.post('/', (req, res) => service.create(req.body)
+  .then(data => res.status(200).send({
+    data,
+    message: 'Ingredient(s) created with success!',
+  }))
+  .catch(err => res.status(500).send(err)));
 
-router.put('/:id', (req, res) => {
-  Ingredient.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, ingredient) => (err ? res.status(500).send('Erro to update ingredient') : res.status(200).send(ingredient)));
-});
+router.put('/:id', (req, res) => service.update(req.params.id, req.body)
+  .then(data => res.status(200).send({
+    data,
+    message: 'Ingredient updatted with success!',
+  }))
+  .catch(err => res.status(500).send(err)));
 
-router.delete('/', (req, res) => {
-  Ingredient.deleteMany((err) => (err ? res.status(500).send('Error to delete all ingredients!') : res.status(200).send('Ingredients deleted with succes!')));
-});
+router.delete('/', (req, res) => service.destroyAll()
+  .then(() => res.status(200).send({
+    data: null,
+    message: 'All ingredients was deleted with succes!',
+  }))
+  .catch(err => res.status(500).send(err)));
 
-router.delete('/:id', (req, res) => {
-  Ingredient.deleteOne({ _id: req.params.id }, (err) => (err ? res.status(500).send('Error to delete this ingredient!') : res.status(200).send('Ingredient deleted with succes!')));
-});
+router.delete('/:id', (req, res) => service.destroy(req.params.id)
+  .then(data => {
+    let message;
+    if (data.deletedCount < 1) {
+      message = 'Nothing deleted!';
+    } else if (data.deletedCount === 1) {
+      message = '1 ingredient deleted with success!';
+    } else {
+      message = `${data.deletedCount} ingredients deleted with success!`;
+    }
+    res.status(200).send({
+      data: null,
+      message,
+    });
+  })
+  .catch(err => res.status(500).send(err)));
 
 module.exports = router;
