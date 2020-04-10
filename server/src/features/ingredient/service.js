@@ -1,6 +1,6 @@
 const Ingredient = require('./model');
 
-const create = (data) => {
+const create = data => {
   const savedIngredients = [];
   let ingredientsToAdd = data;
 
@@ -9,7 +9,7 @@ const create = (data) => {
   }
 
   try {
-    ingredientsToAdd.forEach((ingredient) => {
+    ingredientsToAdd.forEach(ingredient => {
       const newIngredient = new Ingredient(ingredient);
       newIngredient.save();
       savedIngredients.push(newIngredient);
@@ -20,11 +20,11 @@ const create = (data) => {
   }
 };
 
-const destroy = (_id) => Ingredient.deleteOne({ _id });
+const destroy = _id => Ingredient.deleteOne({ _id });
 
 const destroyAll = () => Ingredient.deleteMany();
 
-const findById = (_id) => Ingredient.findOne({ _id }, 'name price');
+const findById = _id => Ingredient.findOne({ _id }, 'name price');
 
 const findAll = () => Ingredient.find();
 

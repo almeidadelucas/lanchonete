@@ -20,6 +20,7 @@
         "quotes": ["error", "single", { "avoidEscape": true }],
         "semi": ["error", "always"],
         "curly": ["error", "all"],
-        "no-multiple-empty-lines": "warn"
+        "no-multiple-empty-lines": "warn",
+        "arrow-parens": ["error", "as-needed"]
     }
 }
