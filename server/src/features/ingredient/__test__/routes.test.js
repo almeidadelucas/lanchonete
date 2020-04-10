@@ -85,7 +85,7 @@ describe('This is to test the ingredients routes', () => {
           expect(res.body.message).toEqual('1 ingredient deleted with success!');
           expect(res.body.data).toEqual(null);
         })
-        .expect(202, done);
+        .expect(200, done);
     });
   });
 
@@ -97,7 +97,7 @@ describe('This is to test the ingredients routes', () => {
         expect(res.body.message).toEqual('Nothing deleted!');
         expect(res.body.data).toEqual(null);
       })
-      .expect(202, done);
+      .expect(200, done);
   });
 
   it('DELETE / - Deleting all ingredients', done => {
@@ -111,7 +111,7 @@ describe('This is to test the ingredients routes', () => {
           expect(res.body.message).toEqual('All ingredients was deleted with succes!');
           expect(res.body.data).toEqual(null);
         })
-        .expect(202, done);
+        .expect(200, done);
     });
   });
 
