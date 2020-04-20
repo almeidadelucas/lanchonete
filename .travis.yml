@@ -1,3 +1,8 @@
-language: javascript
-rvm:
-  - 8.0
+language: node_js
+node_js:
+  - 12.0
+services:
+  - mongodb
+before_script:
+  - sleep 15
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
