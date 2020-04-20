@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - stable
+services:
+  - mongodb
+before_script:
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+install:
+  - cd server && npm install && cd ..
+script:
+  - cd server && npm t
