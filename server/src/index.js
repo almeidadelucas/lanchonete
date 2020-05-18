@@ -1,6 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const logger = require('pino')({
+  prettyPrint: {
+    colorize: true,
+    levelFirst: true,
+  },
+});
 const routers = require('./routes');
 
 const app = express();
@@ -15,7 +21,7 @@ const server = app.listen(3000, async () => {
     useUnifiedTopology: true,
     useFindAndModify: false,
   });
-  console.debug('server running on port 3000');
+  logger.info('server running on port 3000');
 });
 
 module.exports = {
