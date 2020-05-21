@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => service.findAll()
     data,
     message: 'All ingredient getted with success!',
   }))
-  .catch(err => next(err)));
+  .catch(next));
 
 router.get('/:id', (req, res, next) => service.findById(req.params.id)
   .then(data => {
@@ -23,28 +23,28 @@ router.get('/:id', (req, res, next) => service.findById(req.params.id)
       message: 'Ingredient not found!',
     });
   })
-  .catch(err => next(err)));
+  .catch(next));
 
 router.post('/', (req, res, next) => service.create(req.body)
   .then(data => res.status(200).send({
     data,
     message: 'Ingredient(s) created with success!',
   }))
-  .catch(err => next(err)));
+  .catch(next));
 
 router.put('/:id', (req, res, next) => service.update(req.params.id, req.body)
   .then(data => res.status(200).send({
     data,
     message: 'Ingredient updatted with success!',
   }))
-  .catch(err => next(err)));
+  .catch(next));
 
 router.delete('/', (req, res, next) => service.destroyAll()
   .then(() => res.status(200).send({
     data: null,
     message: 'All ingredients was deleted with succes!',
   }))
-  .catch(err => next(err)));
+  .catch(next));
 
 router.delete('/:id', (req, res, next) => service.destroy(req.params.id)
   .then(data => {
@@ -61,6 +61,6 @@ router.delete('/:id', (req, res, next) => service.destroy(req.params.id)
       message,
     });
   })
-  .catch(err => next(err)));
+  .catch(next));
 
 module.exports = router;
