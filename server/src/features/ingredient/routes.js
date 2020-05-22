@@ -3,14 +3,14 @@ const service = require('./service');
 
 const router = express.Router();
 
-router.get('/', (req, res) => service.findAll()
+router.get('/', (req, res, next) => service.findAll()
   .then(data => res.status(200).send({
     data,
     message: 'All ingredient getted with success!',
   }))
-  .catch(err => res.status(500).send(err)));
+  .catch(next));
 
-router.get('/:id', (req, res) => service.findById(req.params.id)
+router.get('/:id', (req, res, next) => service.findById(req.params.id)
   .then(data => {
     if (data) {
       return res.status(200).send({
@@ -23,30 +23,30 @@ router.get('/:id', (req, res) => service.findById(req.params.id)
       message: 'Ingredient not found!',
     });
   })
-  .catch(err => res.status(500).send(err)));
+  .catch(next));
 
-router.post('/', (req, res) => service.create(req.body)
+router.post('/', (req, res, next) => service.create(req.body)
   .then(data => res.status(200).send({
     data,
     message: 'Ingredient(s) created with success!',
   }))
-  .catch(err => res.status(500).send(err)));
+  .catch(next));
 
-router.put('/:id', (req, res) => service.update(req.params.id, req.body)
+router.put('/:id', (req, res, next) => service.update(req.params.id, req.body)
   .then(data => res.status(200).send({
     data,
     message: 'Ingredient updatted with success!',
   }))
-  .catch(err => res.status(500).send(err)));
+  .catch(next));
 
-router.delete('/', (req, res) => service.destroyAll()
+router.delete('/', (req, res, next) => service.destroyAll()
   .then(() => res.status(200).send({
     data: null,
     message: 'All ingredients was deleted with succes!',
   }))
-  .catch(err => res.status(500).send(err)));
+  .catch(next));
 
-router.delete('/:id', (req, res) => service.destroy(req.params.id)
+router.delete('/:id', (req, res, next) => service.destroy(req.params.id)
   .then(data => {
     let message;
     if (data.deletedCount < 1) {
@@ -61,6 +61,6 @@ router.delete('/:id', (req, res) => service.destroy(req.params.id)
       message,
     });
   })
-  .catch(err => res.status(500).send(err)));
+  .catch(next));
 
 module.exports = router;
