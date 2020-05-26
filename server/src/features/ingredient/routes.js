@@ -11,17 +11,17 @@ const service = require('./service');
 const router = express.Router();
 router.use(pino);
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   req.log.info('GET /ingredients/');
   return service.findAll()
     .then(data => res.status(200).send({
       data,
       message: 'All ingredient getted with success!',
     }))
-    .catch(err => res.status(500).send(err));
+    .catch(next);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   req.log.info(`GET /ingredients/${req.params.id}`);
   return service.findById(req.params.id)
     .then(data => {
@@ -36,40 +36,40 @@ router.get('/:id', (req, res) => {
         message: 'Ingredient not found!',
       });
     })
-    .catch(err => res.status(500).send(err));
+    .catch(next);
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   req.log.info('POST /ingredients/');
   return service.create(req.body)
     .then(data => res.status(200).send({
       data,
       message: 'Ingredient(s) created with success!',
     }))
-    .catch(err => res.status(500).send(err));
+    .catch(next);
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res, next) => {
   req.log.info(`PUT /ingredients/${req.params.id}`);
   return service.update(req.params.id, req.body)
     .then(data => res.status(200).send({
       data,
       message: 'Ingredient updatted with success!',
     }))
-    .catch(err => res.status(500).send(err));
+    .catch(next);
 });
 
-router.delete('/', (req, res) => {
+router.delete('/', (req, res, next) => {
   req.log.info('DELETE /ingredients/');
   return service.destroyAll()
     .then(() => res.status(200).send({
       data: null,
       message: 'All ingredients was deleted with succes!',
     }))
-    .catch(err => res.status(500).send(err));
+    .catch(next);
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, next) => {
   req.log.info(`DELETE /ingredients/${req.params.id}`);
   return service.destroy(req.params.id)
     .then(data => {
@@ -86,7 +86,7 @@ router.delete('/:id', (req, res) => {
         message,
       });
     })
-    .catch(err => res.status(500).send(err));
+    .catch(next);
 });
 
 module.exports = router;
