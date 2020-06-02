@@ -1,13 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const logger = require('pino')({
-  prettyPrint: {
-    colorize: true,
-    levelFirst: true,
-  },
-});
 const routers = require('./routes');
+const logger = require('./logger');
 
 const app = express();
 const PORT = 3000;
