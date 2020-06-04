@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   const { message } = err;
   const statusCode = err.statusCode ? err.statusCode : 500;
-  logger.pino.error(err.message);
+  logger.error(err.message);
   res.status(statusCode).send(message);
 });
 
@@ -29,8 +29,8 @@ const server = app.listen(PORT, () => {
       useUnifiedTopology: true,
       useFindAndModify: false,
     })
-    .then(() => logger.pino.info('Server running on port 3000'))
-    .catch(err => logger.pino.error(`Error to start the server: ${err.message}`));
+    .then(() => logger.info('Server running on port 3000'))
+    .catch(err => logger.error(`Error to start the server: ${err.message}`));
 });
 
 module.exports = {
