@@ -1,7 +1,9 @@
 const express = require('express');
+const morgan = require('morgan');
 const service = require('./service');
 
 const router = express.Router();
+router.use(morgan('dev'));
 
 router.get('/', (req, res, next) => service.findAll()
   .then(data => res.status(200).send({
