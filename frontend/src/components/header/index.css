@@ -1,0 +1,38 @@
+.menu {
+  display: flex;
+  justify-content: space-between;
+  background-color: #3FB0E8;
+  height: 60px;
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+}
+
+.menu-right {
+  display: flex;
+  align-items: center;
+}
+
+.menu-item {
+  font-size: 20px;
+  margin: 5px 20px;
+  text-align: center;
+}
+
+.menu-item a {
+  color: white;
+  text-decoration: none;
+}
+
+.menu-item a:hover {
+  font-weight: bold;
+}
+
+.menu-avatar {
+  border-radius: 100%;
+  height: 45px;
+  width: 45px;
+  background-color: teal;
+}
