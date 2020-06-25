@@ -33,21 +33,6 @@ const Home = () => {
       </Carousel.Item>
     </Carousel>
     </div>
-    // <Slider
-    //   dots={true}
-    //   infinite={true}
-    //   speed={500}
-    //   slidesToShow={1}
-    //   slidesToScroll={1}
-    //   className="home-carousel"
-    // >
-    //   <div>
-    //     <h3>1</h3>
-    //   </div>
-    //   <div>
-    //     <h3>2</h3>
-    //   </div>
-    // </Slider>
   );
 };
 
