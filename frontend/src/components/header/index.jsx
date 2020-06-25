@@ -1,29 +1,55 @@
-import React from 'react';
-import './index.css';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AppBar, Toolbar, Avatar, Menu, MenuItem } from '@material-ui/core';
+import './index.css';
 
 const Header = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handlePopover = event => {
+    event ? setAnchorEl(event.currentTarget) : setAnchorEl(null); 
+  }
+
   return (
-    <div className="menu">
-      <div className="menu-left">
-        <div className="menu-item">
-          <Link to="/">Home</Link>
+    <AppBar position="static">
+      <Toolbar className="header">
+        <div className="header-left">
+          <Link to="/" className="header-item">
+            Home
+          </Link>
         </div>
-      </div>
-      <div className="menu-right">
-        <div className="menu-item">
-          <Link to="/menu">Cardápio</Link>
+        <div className="header-right">
+          <Link to="/menu" className="header-item">
+            Cardápio
+          </Link>
+          <Link to="/cart" className="header-item">
+            Carrinho
+          </Link>
+          <Avatar 
+            className="header-avatar"
+            onMouseEnter={handlePopover}
+          />
+          <Menu
+            anchorEl={anchorEl}
+            open={!!anchorEl}
+            onClose={() => handlePopover(null)}
+            getContentAnchorEl={null}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+            className="header-avatar-menu"
+          >
+            <MenuItem onClick={() => handlePopover(null)}>Sing in</MenuItem>
+          </Menu>
         </div>
-        <div className="menu-item">
-          <Link to="/cart">Carrinho</Link>
-        </div>
-        <div className="menu-item">
-          <div className="menu-avatar" />
-        </div>
-      </div>
-    </div>
+      </Toolbar>
+    </AppBar>
   );
 };
   
 export default Header;
-  
