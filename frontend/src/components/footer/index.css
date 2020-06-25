@@ -1,5 +1,21 @@
 .footer {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   height: 90px;
+  padding: 20px 0px;
+  align-items: baseline;
+}
+
+.footer-logo {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.footer-contacts {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.footer-social-media {
+  margin: 0px 2px;
 }
