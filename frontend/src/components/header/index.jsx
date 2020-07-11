@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
+import { singnInWithGoogle, signOut } from '../../utils/fireabse';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Avatar, Menu, MenuItem } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
+
 import './index.css';
 
-const Header = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
+const Header = ({ currentUser }) => {
+  const { enqueueSnackbar } = useSnackbar();
+  const [ anchorEl, setAnchorEl ] = useState(null);
 
   const handlePopover = event => {
     event ? setAnchorEl(event.currentTarget) : setAnchorEl(null); 
   }
+
+  const success = action => enqueueSnackbar(`${action} realizado com sucesso!`, { variant: 'success' });
+  const failed = message => enqueueSnackbar(message, { variant: 'error' });
 
   return (
     <AppBar position="static">
@@ -25,9 +33,10 @@ const Header = () => {
           <Link to="/cart" className="header-item">
             Carrinho
           </Link>
-          <Avatar 
+          <Avatar
             className="header-avatar"
             onMouseEnter={handlePopover}
+            src={currentUser ? currentUser.photoURL : ''}
           />
           <Menu
             anchorEl={anchorEl}
@@ -44,12 +53,32 @@ const Header = () => {
             }}
             className="header-avatar-menu"
           >
-            <MenuItem onClick={() => handlePopover(null)}>Sing in</MenuItem>
+            {
+              currentUser ? (
+                <MenuItem onClick={() => {
+                  signOut(success, failed);
+                  handlePopover(null);
+                }}>
+                  Sing out
+                </MenuItem>
+              ) : (
+                <MenuItem onClick={() => {
+                  singnInWithGoogle(success, failed);
+                  handlePopover(null);
+                }}>
+                  Sing in
+                </MenuItem>
+              )
+            }
           </Menu>
         </div>
       </Toolbar>
     </AppBar>
   );
 };
-  
-export default Header;
+
+const mapStateToProps = state => ({
+  currentUser: state.authReducers.currentUser,
+});
+
+export default connect(mapStateToProps)(Header);
