@@ -8,7 +8,7 @@ router.use(morgan('dev'));
 router.get('/', (req, res, next) => service.findAll()
   .then(data => res.status(200).send({
     data,
-    message: 'All ingredient getted with success!',
+    message: 'All ingredient got with success!',
   }))
   .catch(next));
 
@@ -17,7 +17,7 @@ router.get('/:id', (req, res, next) => service.findById(req.params.id)
     if (data) {
       return res.status(200).send({
         data,
-        message: 'Ingredient getted with success!',
+        message: 'Ingredient got with success!',
       });
     }
     return res.status(404).send({

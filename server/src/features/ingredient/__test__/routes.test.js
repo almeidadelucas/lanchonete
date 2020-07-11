@@ -9,7 +9,7 @@ describe('This is to test the ingredients routes', () => {
       .get('/ingredients/')
       .expect('Content-Type', 'application/json; charset=utf-8')
       .expect(res => {
-        expect(res.body.message).toEqual('All ingredient getted with success!');
+        expect(res.body.message).toEqual('All ingredient got with success!');
         expect(res.body.data).toEqual([]);
       })
       .expect(200, done);
@@ -23,7 +23,7 @@ describe('This is to test the ingredients routes', () => {
         .get(`/ingredients/${data._id}`)
         .expect('Content-Type', 'application/json; charset=utf-8')
         .expect(res => {
-          expect(res.body.message).toEqual('Ingredient getted with success!');
+          expect(res.body.message).toEqual('Ingredient got with success!');
           expect(res.body.data.name).toEqual('Hamburger');
           expect(res.body.data.price).toEqual(7.00);
         })
