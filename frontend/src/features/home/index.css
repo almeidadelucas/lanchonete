@@ -1,0 +1,15 @@
+.home-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-carousel {
+  width: 50vw;
+  height: 30vh;
+}
+
+.home-carousel-item {
+  width: 50vw;
+  height: 30vh;
+}
